@@ -1,0 +1,13 @@
+FROM debian:bookworm-slim
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        libssl3 \
+        libgcc-s1 \
+        libc6 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /opt
+COPY ./src/target/release/web ./web
+CMD ["/opt/web"]
